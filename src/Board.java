@@ -32,12 +32,49 @@ public class Board {
 		}
 	}
 
-	public void showstuff() {
-		for (int i=0; i<colNum; i++) {
-			System.out.print(i + ": ");
-			System.out.print(cols.get(i));
+	public boolean checkWin() {
+		return(false);
+	}
+	
+	public void printBoard() {
+		int maxTopHeight = 0;
+		int maxBottomHeight = 0;
+		for (int i=0; i<=11; i++) {
+			if(cols.get(i).size()>maxBottomHeight)
+				maxBottomHeight = cols.get(i).size();
+		}
+		
+		for (int i=12; i<=23; i++) {
+			if(cols.get(i).size()>maxTopHeight)
+				maxTopHeight = cols.get(i).size();
+		}
+		
+		System.out.printf("\n%-10s%-10s%-10s%-10s%-10s%-10s%-10s%-10s%-10s%-10s%-10s%-10s\n\n", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24");
+		for (int j=0; j<maxTopHeight; j++) {
+			for (int i=12; i<=23; i++) {
+				try {
+					System.out.printf("%-10s", " " + cols.get(i).get(j));
+				} catch (ArrayIndexOutOfBoundsException e) {
+					System.out.printf("%-10s", " ");
+				}
+			}
 			System.out.println();
 		}
+		
+		System.out.printf("\n\n%-10s%-10s%-10s%-10s%-10s%-10s%-10s%-10s%-10s%-10s%-10s%-10s\n\n", "--", "--", "--", "--", "--", "--", "--", "--", "--", "--", "--", "--");
+		
+		for (int j=maxBottomHeight; j>0; j--) {
+			for (int i=11; i>=0; i--) {
+				try {
+					System.out.printf("%-10s", " " + cols.get(i).get(j));
+				} catch (ArrayIndexOutOfBoundsException e) {
+					System.out.printf("%-10s", " ");
+				}
+			}
+			System.out.println();
+		}
+		
+		System.out.printf("\n%-10s%-10s%-10s%-10s%-10s%-10s%-10s%-10s%-10s%-10s%-10s%-10s\n\n", "12", "11", "10", " 9", " 8", " 7", " 6", " 5", " 4", " 3", " 2", " 1");
 	}
 
 }
