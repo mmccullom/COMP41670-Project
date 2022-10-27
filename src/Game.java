@@ -13,11 +13,34 @@ public class Game {
 		player2 = scanner.nextLine();
 		
 		Board b = new Board();
+
+		Die dice = new Die();
+
+		boolean quit = false;
+
 		
-		while (!b.checkWin()) {
+		while (!b.checkWin()&&!quit) {
 			b.printBoard();
+
 			System.out.print("\nEnter Command: ");
+
 			String command = scanner.nextLine();
+			Command command1 = new Command(command);
+			boolean commandDone= false;
+
+			do {
+				if (command1.isRoll()) {
+					System.out.print("You have rolled: "+dice.roll() + "\n");
+					commandDone = true;
+
+				} else if (command1.isQuit()) {
+					quit = true;
+					commandDone = true;
+				}
+
+			} while (!commandDone);
+
+
 		}
 
 	}
