@@ -67,6 +67,37 @@ public class Board {
 		System.exit(0);
 	}
 	
+	public ArrayList<Move> checkMoves(int d1, int d2, boolean isBlack) {
+		ArrayList<Move> validMoves = new ArrayList<Move>();
+		for (int i=23; i>=0; i--) {
+			if(!cols.get(i).empty() && (cols.get(i).peek().isBlack() == isBlack)) {
+				
+				// First die moves
+				if(i-d1 < 0)
+					validMoves.add(new Move(i, -1, false));
+				else if (cols.get(i-d1).empty())
+					validMoves.add(new Move(i, i-d1, false));
+				else if (cols.get(i-d1).peek().isBlack() == isBlack)
+					validMoves.add(new Move(i, i-d1, false));
+				else if ((cols.get(i-d1).peek().isBlack() != isBlack) && cols.get(i-d1).size()==1)
+					validMoves.add(new Move(i, i-d1, true));
+				// Second die moves
+				if(i-d2 < 0)
+					validMoves.add(new Move(i, -1, false));
+				else if (cols.get(i-d2).empty())
+					validMoves.add(new Move(i, i-d2, false));
+				else if (cols.get(i-d2).peek().isBlack() == isBlack)
+					validMoves.add(new Move(i, i-d2, false));
+				else if ((cols.get(i-d2).peek().isBlack() != isBlack) && cols.get(i-d1).size()==1)
+					validMoves.add(new Move(i, i-d2, true));
+				
+				// Total die moves - TBD
+			}
+		}
+		
+		return(validMoves);
+	}
+	
 	public void printBoard(String currentPlayer) {
 		int maxTopHeight = 0;
 		int maxBottomHeight = 0;

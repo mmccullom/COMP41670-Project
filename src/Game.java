@@ -16,7 +16,7 @@ public class Game {
 
 		Die die = new Die();
 		
-		boolean player1Going = b.start(player1, player2, die);;
+		boolean player1Going = b.start(player1, player2, die);
 		
 		while (!b.checkWin()) {
 			b.printBoard(player1Going ? player1 : player2);
