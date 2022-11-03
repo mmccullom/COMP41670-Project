@@ -4,16 +4,14 @@ public class Command {
 
     private CommandType commandType;
 
-
-    Command (String input) {
+    public Command (String input) {
         String inputFormatted = input.trim().toUpperCase();
         if (inputFormatted.equals("Q")) {
             commandType = CommandType.QUIT;
         } else if (inputFormatted.equals("R")) {
             commandType = CommandType.ROLL;
         } else {
-            //throw new Exception("Invalid Command");
-            System.out.print("Invalid Command");
+            System.out.println("\nInvalid Command");
         }
     }
 

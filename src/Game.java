@@ -27,30 +27,24 @@ public class Game {
 
 			System.out.print("\nEnter Command: ");
 
-			String command = scanner.nextLine();
-			Command command1 = new Command(command);
-			boolean commandDone= false;
+			String entry = scanner.nextLine();
+			Command command = new Command(entry);
+			if (command.isRoll()) {
+				val1 = dice.roll();
+				val2 = dice.roll();
 
-			do {
-				if (command1.isRoll()) {
-					val1 = dice.roll();
-					val2 = dice.roll();
+				total = val1 + val2;
 
-					total = val1 + val2;
+				System.out.print("Dice 1: "+ val1 + "\nDice 2: " + val2 + "\n");
+				System.out.print("Total Roll Value: " + total + "\n");
 
-					System.out.print("Dice 1: "+ val1 + "\nDice 2: " + val2 + "\n");
-					System.out.print("Total Roll Value: " + total + "\n");
-					commandDone = true;
-
-				} else if (command1.isQuit()) {
-					quit = true;
-					commandDone = true;
-				}
-
-			} while (!commandDone);
-
-
+			} else if (command.isQuit()) {
+				quit = true;
+			}
 		}
+		
+		if (quit)
+			System.out.println("Quitting Game");
 
 	}
 }
