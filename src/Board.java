@@ -63,7 +63,7 @@ public class Board {
 		
 		System.out.printf("\n\n%-10s%-10s%-10s%-10s%-10s%-10s%-10s%-10s%-10s%-10s%-10s%-10s\n\n", "--", "--", "--", "--", "--", "--", "--", "--", "--", "--", "--", "--");
 		
-		for (int j=maxBottomHeight; j>0; j--) {
+		for (int j=maxBottomHeight; j>=0; j--) {
 			for (int i=11; i>=0; i--) {
 				try {
 					System.out.printf("%-10s", " " + cols.get(i).get(j));
