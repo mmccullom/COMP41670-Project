@@ -14,37 +14,29 @@ public class Game {
 		
 		Board b = new Board();
 
-		Die dice = new Die();
-		int val1;
-		int val2;
-		int total;
-
-		boolean quit = false;
+		Die die = new Die();
+		
+		boolean player1Going = true;
 
 		
-		while (!b.checkWin()&&!quit) {
-			b.printBoard();
-
+		while (!b.checkWin()) {
+			b.printBoard(player1Going ? player1 : player2);
+			
 			System.out.print("\nEnter Command: ");
 
 			String entry = scanner.nextLine();
 			Command command = new Command(entry);
+			
 			if (command.isRoll()) {
-				val1 = dice.roll();
-				val2 = dice.roll();
-
-				total = val1 + val2;
-
-				System.out.print("Dice 1: "+ val1 + "\nDice 2: " + val2 + "\n");
-				System.out.print("Total Roll Value: " + total + "\n");
-
+				b.roll(die);
+				player1Going = !player1Going;
 			} else if (command.isQuit()) {
-				quit = true;
+				b.quit();
+			} else if (command.isMove()) {
+				b.move();
 			}
+
 		}
-		
-		if (quit)
-			System.out.println("Quitting Game");
 
 	}
 }

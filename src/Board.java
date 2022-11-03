@@ -36,7 +36,22 @@ public class Board {
 		return(false);
 	}
 	
-	public void printBoard() {
+	public void roll(Die die) {
+		int val1 = die.roll();
+		int val2 = die.roll();
+
+		int total = val1 + val2;
+
+		System.out.print("Dice 1: "+ val1 + "\nDice 2: " + val2 + "\n");
+		System.out.print("Total Roll Value: " + total + "\n");
+	}
+	
+	public void quit() {
+		System.out.println("Exiting Game");
+		System.exit(0);
+	}
+	
+	public void printBoard(String currentPlayer) {
 		int maxTopHeight = 0;
 		int maxBottomHeight = 0;
 		for (int i=0; i<=11; i++) {
@@ -75,6 +90,12 @@ public class Board {
 		}
 		
 		System.out.printf("\n%-10s%-10s%-10s%-10s%-10s%-10s%-10s%-10s%-10s%-10s%-10s%-10s\n\n", "12", "11", "10", " 9", " 8", " 7", " 6", " 5", " 4", " 3", " 2", " 1");
+		System.out.println("Current Player: " + currentPlayer);
+	}
+
+	public void move() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
