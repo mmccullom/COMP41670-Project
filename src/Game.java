@@ -15,6 +15,9 @@ public class Game {
 		Board b = new Board();
 
 		Die dice = new Die();
+		int val1;
+		int val2;
+		int total;
 
 		boolean quit = false;
 
@@ -30,7 +33,13 @@ public class Game {
 
 			do {
 				if (command1.isRoll()) {
-					System.out.print("You have rolled: "+dice.roll() + "\n");
+					val1 = dice.roll();
+					val2 = dice.roll();
+
+					total = val1 + val2;
+
+					System.out.print("Dice 1: "+ val1 + "\nDice 2: " + val2 + "\n");
+					System.out.print("Total Roll Value: " + total + "\n");
 					commandDone = true;
 
 				} else if (command1.isQuit()) {

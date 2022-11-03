@@ -11,6 +11,7 @@ public class Die {
 		return(val);
 	}
 
+
 	public int getVal() {
 		return(val);
 	}
