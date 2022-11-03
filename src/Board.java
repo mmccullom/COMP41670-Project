@@ -36,6 +36,22 @@ public class Board {
 		return(false);
 	}
 	
+	public boolean start(String name1, String name2, Die die) {
+		int val1 = die.roll();
+		int val2 = die.roll();
+		System.out.println(name1 + " rolls " + val1);
+		System.out.println(name2 + " rolls " + val2);
+		if (val1 > val2) {
+			System.out.println(name1 + " Goes First");
+			return true;
+		} else if (val2 > val1) {
+			System.out.println(name2 + " Goes First");
+			return false;
+		} else {
+			return start(name1, name2, die);
+		}
+	}
+	
 	public void roll(Die die) {
 		int val1 = die.roll();
 		int val2 = die.roll();
