@@ -27,6 +27,10 @@ public class Move {
 		return("Move piece from col " + (srcCol) + " to col " + (destCol));
 	}
 	
+	public boolean getRemoveOpponent() {
+		return(removeOpponent);
+	}
+	
 	public boolean isDieOne() {
 		return(dieOne);
 	}

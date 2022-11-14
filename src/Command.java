@@ -10,7 +10,6 @@ public class Command {
 
     public Command (String input) {
         String inputFormatted = input.trim().toUpperCase();
-        String[] inputSeparated = input.split(" ");
         if (inputFormatted.equals("Q")) {
             commandType = CommandType.QUIT;
         } else if (inputFormatted.equals("R")) {

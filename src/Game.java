@@ -29,7 +29,9 @@ public class Game {
 			
 			System.out.print("\nEnter Command: ");
 
+
 			String entry = scanner.nextLine();
+
 			Command command = new Command(entry);
 			
 			if (command.isRoll()) {
@@ -43,32 +45,47 @@ public class Game {
 				b.quit();
 			} else if (command.isMove()) {
 				if (rolled) {
-					ArrayList<Move> moves = b.list(die1, die2, player1Going);
-					System.out.print("\nSelect a move by number: ");
-					int selection = scanner.nextInt();
-					Move firstMove = moves.get(selection-1);
-					b.move(firstMove);
-					
-					View.display(player1Going ? player1 : player2, b);
-					
-					ArrayList<Move> moves2;
-					if (firstMove.isDieOne()) {
-						moves2 = b.list(die2, player1Going);
+					if (die1.getVal()==die2.getVal()) {
+						System.out.println("Doubles! Go four times");
+						for (int i=0; i<=3; i++) {
+							ArrayList<Move> moves = b.list(die1,  player1Going);
+							System.out.println("\nSelect a move by number: ");
+							int selection = Integer.parseInt(scanner.nextLine());
+							b.move(moves.get(selection-1));
+							if (i!=3)
+								View.display(player1Going ? player1 : player2, b);
+						}
+						rolled = false;
+						player1Going = !player1Going;
 					} else {
-						moves2 = b.list(die1, player1Going);
+						ArrayList<Move> moves = b.list(die1, die2, player1Going);
+	
+						System.out.print("\nSelect a move by number: ");
+						int selection = Integer.parseInt(scanner.nextLine());
+						Move firstMove = moves.get(selection-1);
+						b.move(firstMove);
+						
+						View.display(player1Going ? player1 : player2, b);
+						
+						ArrayList<Move> moves2;
+						if (firstMove.isDieOne()) {
+							moves2 = b.list(die2, player1Going);
+						} else {
+							moves2 = b.list(die1, player1Going);
+						}
+						System.out.print("\nSelect a move by number: ");
+						int selection2 = Integer.parseInt(scanner.nextLine());
+						Move secondMove = moves2.get(selection2-1);
+						b.move(secondMove);	
+						rolled = false;
+						player1Going = !player1Going;
 					}
-					System.out.print("\nSelect a move by number: ");
-					int selection2 = scanner.nextInt();
-					Move secondMove = moves2.get(selection2-1);
-					b.move(secondMove);	
-					rolled = false;
-					player1Going = !player1Going;
 				}
 				else {
 					System.out.println("Roll (R) before making a move");
 				}
 			}
 		}
-
+		scanner.close();
 	}
 }
