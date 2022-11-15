@@ -55,6 +55,8 @@ public class Game {
 				}
 			} else if (command.isQuit()) {
 				b.quit();
+			} else if (command.isPip()) {
+				b.pip();
 			} else if (command.isMove()) {
 				if (rolled) {//IndexOutOfBoundsException NumberFormatException
 					if (die1.getVal()==die2.getVal()) {

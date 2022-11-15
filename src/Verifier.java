@@ -5,52 +5,51 @@ public class Verifier {
 
 	public static ArrayList<Move> checkMoves(ArrayList<Stack<Checker>> cols, int d1, boolean isBlack) {
 		ArrayList<Move> validMoves = new ArrayList<Move>();
-		for (int i=24; i>=1; i--) {
-			if(!cols.get(i).empty() && (cols.get(i).peek().isBlack() == isBlack)) {
-				if (isBlack) {
+		if (isBlack) {
+			for (int i=1; i<=24; i++) {
+				if(!cols.get(i).empty() && (cols.get(i).peek().isBlack() == isBlack)) {
+					// First die moves
 					if(i+d1 > 24) {
 						if (isBlackFull(cols))
-							validMoves.add(new Move(i, 25, false, false));
-					}
+							validMoves.add(new Move(i, 25, false, true));
+						}
 					else if (cols.get(i+d1).empty())
-						validMoves.add(new Move(i, i+d1, false, false));
+						validMoves.add(new Move(i, i+d1, false, true));
 					else if (cols.get(i+d1).peek().isBlack() == isBlack)
-						validMoves.add(new Move(i, i+d1, false, false));
+						validMoves.add(new Move(i, i+d1, false, true));
 					else if ((cols.get(i+d1).peek().isBlack() != isBlack) && cols.get(i+d1).size()==1)
-						validMoves.add(new Move(i, i+d1, true, false));
-				} else {
-					if(i-d1 < 1) {
-							if (isWhiteFull(cols))
-								validMoves.add(new Move(i, 0, false, false));
+						validMoves.add(new Move(i, i+d1, true, true));
 					}
-					else if (cols.get(i-d1).empty())
-						validMoves.add(new Move(i, i-d1, false, false));
-					else if (cols.get(i-d1).peek().isBlack() == isBlack)
-						validMoves.add(new Move(i, i-d1, false, false));
-					else if ((cols.get(i-d1).peek().isBlack() != isBlack) && cols.get(i-d1).size()==1)
-						validMoves.add(new Move(i, i-d1, true, false));
 				}
-			}
-		}
-		
+			} else {
+				for(int i=24; i>=1; i--) {
+					if(!cols.get(i).empty() && (cols.get(i).peek().isBlack() == isBlack)) {
+						if(i-d1 < 1) {
+							if (isWhiteFull(cols))
+								validMoves.add(new Move(i, 0, false, true));
+							}
+						else if (cols.get(i-d1).empty())
+							validMoves.add(new Move(i, i-d1, false, true));
+						else if (cols.get(i-d1).peek().isBlack() == isBlack)
+							validMoves.add(new Move(i, i-d1, false, true));
+						else if ((cols.get(i-d1).peek().isBlack() != isBlack) && cols.get(i-d1).size()==1)
+							validMoves.add(new Move(i, i-d1, true, true));
+						}
+					}
+				}
 		return(validMoves);
 	}
 	
 	public static ArrayList<Move> checkMoves(ArrayList<Stack<Checker>> cols, int d1, int d2, boolean isBlack) {
 		ArrayList<Move> validMoves = new ArrayList<Move>();
-			
-		
-		for (int i=24; i>=1; i--) {
-			if(!cols.get(i).empty() && (cols.get(i).peek().isBlack() == isBlack)) {
-				if (isBlack) {
-					
-					
-					
+		if (isBlack) {
+			for (int i=1; i<=24; i++) {
+				if(!cols.get(i).empty() && (cols.get(i).peek().isBlack() == isBlack)) {
 					// First die moves
 					if(i+d1 > 24) {
 						if (isBlackFull(cols))
 							validMoves.add(new Move(i, 25, false, true));
-					}
+						}
 					else if (cols.get(i+d1).empty())
 						validMoves.add(new Move(i, i+d1, false, true));
 					else if (cols.get(i+d1).peek().isBlack() == isBlack)
@@ -64,47 +63,46 @@ public class Verifier {
 					if(i+d2 > 24) {
 						if (isBlackFull(cols))
 							validMoves.add(new Move(i, 25, false, false));
-					}
+						}
 					else if (cols.get(i+d2).empty())
 						validMoves.add(new Move(i, i+d2, false, false));
 					else if (cols.get(i+d2).peek().isBlack() == isBlack)
 						validMoves.add(new Move(i, i+d2, false, false));
 					else if ((cols.get(i+d2).peek().isBlack() != isBlack) && cols.get(i+d2).size()==1)
 						validMoves.add(new Move(i, i+d2, true, false));
-					
-					
-				} else {
-					
-					
-					if(i-d1 < 1) {
-						if (isWhiteFull(cols))
-							validMoves.add(new Move(i, 0, false, true));
 					}
-					else if (cols.get(i-d1).empty())
-						validMoves.add(new Move(i, i-d1, false, true));
-					else if (cols.get(i-d1).peek().isBlack() == isBlack)
-						validMoves.add(new Move(i, i-d1, false, true));
-					else if ((cols.get(i-d1).peek().isBlack() != isBlack) && cols.get(i-d1).size()==1)
-						validMoves.add(new Move(i, i-d1, true, true));
-					
-					
-					
-					
-					// Second die moves
-					if(i-d2 < 1) {
-							if (isWhiteFull(cols))
-								validMoves.add(new Move(i, 0, false, false));
-					}
-					else if (cols.get(i-d2).empty())
-						validMoves.add(new Move(i, i-d2, false, false));
-					else if (cols.get(i-d2).peek().isBlack() == isBlack)
-						validMoves.add(new Move(i, i-d2, false, false));
-					else if ((cols.get(i-d2).peek().isBlack() != isBlack) && cols.get(i-d2).size()==1)
-						validMoves.add(new Move(i, i-d2, true, false));
 				}
-			}
-		}
-		
+			} else {
+				for(int i=24; i>=1; i--) {
+					if(!cols.get(i).empty() && (cols.get(i).peek().isBlack() == isBlack)) {
+						if(i-d1 < 1) {
+							if (isWhiteFull(cols))
+								validMoves.add(new Move(i, 0, false, true));
+							}
+						else if (cols.get(i-d1).empty())
+							validMoves.add(new Move(i, i-d1, false, true));
+						else if (cols.get(i-d1).peek().isBlack() == isBlack)
+							validMoves.add(new Move(i, i-d1, false, true));
+						else if ((cols.get(i-d1).peek().isBlack() != isBlack) && cols.get(i-d1).size()==1)
+							validMoves.add(new Move(i, i-d1, true, true));
+						
+						
+						
+						
+						// Second die moves
+						if(i-d2 < 1) {
+								if (isWhiteFull(cols))
+									validMoves.add(new Move(i, 0, false, false));
+								}
+						else if (cols.get(i-d2).empty())
+							validMoves.add(new Move(i, i-d2, false, false));
+						else if (cols.get(i-d2).peek().isBlack() == isBlack)
+							validMoves.add(new Move(i, i-d2, false, false));
+						else if ((cols.get(i-d2).peek().isBlack() != isBlack) && cols.get(i-d2).size()==1)
+							validMoves.add(new Move(i, i-d2, true, false));
+						}
+					}
+				}
 		return(validMoves);
 	}
 	

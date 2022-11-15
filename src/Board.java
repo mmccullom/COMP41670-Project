@@ -116,6 +116,20 @@ public class Board {
 		return(moves);
 	}
 	
+	public void pip() {
+		int blackCount = 0;
+		int whiteCount = 0;
+		for (int i=1; i<=24; i++) {
+			if (!cols.get(i).empty()) {
+				if (cols.get(i).peek().isBlack())
+					blackCount += (25-i) * cols.get(i).size();
+				if (cols.get(i).peek().isWhite())
+					whiteCount += i * cols.get(i).size();
+			}
+		}
+		System.out.println("Black Pip: " + blackCount + "\nWhite Pipe: " + whiteCount);
+	}
+	
 
 	
 	public ArrayList<Stack<Checker>> getCols() {
