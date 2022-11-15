@@ -44,9 +44,9 @@ public class View {
 		
 		System.out.printf("\n%-10s%-10s%-10s%-10s%-10s%-10s%-10s%-10s%-10s%-10s%-10s%-10s\n\n", "12", "11", "10", " 9", " 8", " 7", " 6", " 5", " 4", " 3", " 2", " 1");
 		if (!cols.get(26).empty())
-			System.out.println("Black Reserve" + cols.get(26).toString());
+			System.out.println("Black Reserve: " + cols.get(26).toString() + "\n");
 		if (!cols.get(27).empty())
-			System.out.println("White Reserve" + cols.get(27).toString());
+			System.out.println("White Reserve: " + cols.get(27).toString() + "\n");
 		System.out.println("Current Player: " + currentPlayer);
 	}
 

@@ -99,7 +99,7 @@ public class Verifier {
 						validMoves.add(new Move(i, i-d2, false, false));
 					else if (cols.get(i-d2).peek().isBlack() == isBlack)
 						validMoves.add(new Move(i, i-d2, false, false));
-					else if ((cols.get(i-d2).peek().isBlack() != isBlack) && cols.get(i-d1).size()==1)
+					else if ((cols.get(i-d2).peek().isBlack() != isBlack) && cols.get(i-d2).size()==1)
 						validMoves.add(new Move(i, i-d2, true, false));
 				}
 			}
@@ -123,9 +123,9 @@ public class Verifier {
 		ArrayList<Move> validMoves = new ArrayList<Move>();
 		if (cols.get(d1).empty())
 			validMoves.add(new Move(26, d1, false, true));
-		else if (!cols.get(d1).peek().isBlack())
+		else if (cols.get(d1).peek().isBlack())
 			validMoves.add(new Move(26, d1, false, true));
-		else if ((cols.get(d1).peek().isBlack()) && cols.get(d1).size()==1)
+		else if (!(cols.get(d1).peek().isBlack()) && cols.get(d1).size()==1)
 			validMoves.add(new Move(26, d1, true, true));
 		return(validMoves);
 	}
@@ -141,11 +141,11 @@ public class Verifier {
 			validMoves.add(new Move(27, 25-d1, true, true));
 		
 		if (cols.get(25-d2).empty())
-			validMoves.add(new Move(27, 25-d2, false, true));
+			validMoves.add(new Move(27, 25-d2, false, false));
 		else if (!cols.get(25-d2).peek().isBlack())
-			validMoves.add(new Move(27, 25-d2, false, true));
+			validMoves.add(new Move(27, 25-d2, false, false));
 		else if ((cols.get(25-d2).peek().isBlack()) && cols.get(25-d2).size()==1)
-			validMoves.add(new Move(27, 25-d2, true, true));
+			validMoves.add(new Move(27, 25-d2, true, false));
 		
 		return(validMoves);
 	}
@@ -155,17 +155,17 @@ public class Verifier {
 		
 		if (cols.get(d1).empty())
 			validMoves.add(new Move(26, d1, false, true));
-		else if (!cols.get(d1).peek().isBlack())
+		else if (cols.get(d1).peek().isBlack())
 			validMoves.add(new Move(26, d1, false, true));
-		else if ((cols.get(d1).peek().isBlack()) && cols.get(d1).size()==1)
+		else if (!(cols.get(d1).peek().isBlack()) && cols.get(d1).size()==1)
 			validMoves.add(new Move(26, d1, true, true));
 
 		if (cols.get(d2).empty())
-			validMoves.add(new Move(26, d2, false, true));
-		else if (!cols.get(d2).peek().isBlack())
-			validMoves.add(new Move(26, d2, false, true));
-		else if ((cols.get(d2).peek().isBlack()) && cols.get(d2).size()==1)
-			validMoves.add(new Move(26, d2, true, true));
+			validMoves.add(new Move(26, d2, false, false));
+		else if (cols.get(d2).peek().isBlack())
+			validMoves.add(new Move(26, d2, false, false));
+		else if (!(cols.get(d2).peek().isBlack()) && cols.get(d2).size()==1)
+			validMoves.add(new Move(26, d2, true, false));
 		
 		return(validMoves);
 	}
@@ -178,7 +178,7 @@ public class Verifier {
 				count+=cols.get(i).size();
 			}
 		}
-		return(count==15);
+		return(count==(15-cols.get(25).size()));
 	}
 	
 	
@@ -189,7 +189,7 @@ public class Verifier {
 				count+=cols.get(i).size();
 			}
 		}
-		return(count==15);
+		return(count==(15-cols.get(0).size()));
 	}
 	
 }
