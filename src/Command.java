@@ -1,6 +1,6 @@
 public class Command {
 
-    private enum CommandType {ROLL, QUIT, MOVE, PIP};
+    private enum CommandType {ROLL, QUIT, MOVE, PIP, DICE, TEST};
 
     private CommandType commandType;
     
@@ -9,7 +9,8 @@ public class Command {
     private int arg2 = -1;
 
     public Command (String input) {
-        String inputFormatted = input.trim().toUpperCase();
+        String inputFormatted = input.trim().toUpperCase().substring(0,1);
+        String[] inputArgs = input.split(" ");
         if (inputFormatted.equals("Q")) {
             commandType = CommandType.QUIT;
         } else if (inputFormatted.equals("R")) {
@@ -18,6 +19,19 @@ public class Command {
         	commandType = CommandType.MOVE;
         } else if (inputFormatted.equals("P")) {
         	commandType = CommandType.PIP;
+        } else if (inputFormatted.equals("D")) {
+        	commandType = CommandType.DICE;
+        	int d1 = Integer.parseInt(inputArgs[1]);
+        	if (d1>0 && d1<7) {
+        		arg1 = d1;
+        	}
+        	int d2 = Integer.parseInt(inputArgs[2]);
+        	if (d2>0 && d1<7) {
+        		arg2 = d2;
+        	}
+        	
+        } else if (inputFormatted.equals("T")) {
+        	
         }
         else{
             System.out.println("\nInvalid Command");
@@ -52,5 +66,13 @@ public class Command {
 	
 	public boolean isPip() {
 		return commandType == CommandType.PIP;
+	}
+	
+	public boolean isDice() {
+		return commandType == CommandType.DICE;
+	}
+	
+	public boolean isTest() {
+		return commandType == CommandType.TEST;
 	}
 }

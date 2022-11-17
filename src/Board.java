@@ -66,6 +66,13 @@ public class Board {
 		System.out.print("Die 1: "+ val1 + "\nDie 2: " + val2 + "\n");
 	}
 	
+	public void dice(Die die1, Die die2, int newVal1, int newVal2) {
+		die1.setVal(newVal1);
+		die2.setVal(newVal2);
+		System.out.println("Setting new dice values");
+		System.out.print("Die 1: "+ die1.getVal() + "\nDie 2: " + die2.getVal() + "\n");
+	}
+	
 	public void quit() {
 		System.out.println("Exiting Game");
 		System.exit(0);

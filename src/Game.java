@@ -53,6 +53,9 @@ public class Game {
 				} else {
 					System.out.println("You have already rolled");
 				}
+			} else if (command.isDice()) {
+				b.dice(die1, die2, command.getArg1(), command.getArg2());
+				rolled = true;
 			} else if (command.isQuit()) {
 				b.quit();
 			} else if (command.isPip()) {

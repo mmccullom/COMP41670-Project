@@ -10,6 +10,10 @@ public class Die {
 		val = (int) Math.ceil(Math.random()*6);
 		return(val);
 	}
+	
+	public void setVal(int newVal) {
+		val = newVal;
+	}
 
 
 	public int getVal() {
