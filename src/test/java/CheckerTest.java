@@ -52,5 +52,27 @@ class CheckerTest {
         assertFalse(piece.isBlack());
     }
 
+    @Test
+    void whiteCheckerShouldReturnCorrectStringW(){
+        Checker piece = null;
+        try {
+            piece = new Checker('w');
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        assertEquals("W", piece.toString());
+    }
+
+
+    @Test
+    void blackCheckerShouldReturnCorrectStringB(){
+        Checker piece = null;
+        try {
+            piece = new Checker('b');
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        assertEquals("B", piece.toString());
+    }
 
 }
