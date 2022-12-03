@@ -137,6 +137,13 @@ public class Board {
 		System.out.println("Black Pip: " + blackCount + "\nWhite Pipe: " + whiteCount);
 	}
 	
+	public void hint() {
+		String[] nonTestCommands = {"ROLL (R)", "QUIT (Q)", "MOVE (M)", "PIP (P)", "HINT (H)"};
+		for (String s : nonTestCommands) {
+			System.out.println(s);
+		}
+	}
+	
 
 	
 	public ArrayList<Stack<Checker>> getCols() {

@@ -1,12 +1,14 @@
 public class Command {
 
-    private enum CommandType {ROLL, QUIT, MOVE, PIP, DICE, TEST};
+    private enum CommandType {ROLL, QUIT, MOVE, PIP, DICE, TEST, HINT};
 
     private CommandType commandType;
     
     private int arg1 = -1;
     
     private int arg2 = -1;
+    
+    private String filename = "";
 
     public Command (String input) {
         String inputFormatted = input.trim().toUpperCase().substring(0,1);
@@ -19,6 +21,11 @@ public class Command {
         	commandType = CommandType.MOVE;
         } else if (inputFormatted.equals("P")) {
         	commandType = CommandType.PIP;
+        } else if (inputFormatted.equals("H")) {
+        	commandType = CommandType.HINT;
+        } else if (inputFormatted.equals("T")) {
+        	commandType = CommandType.TEST;
+        	filename = inputArgs[1];
         } else if (inputFormatted.equals("D")) {
         	commandType = CommandType.DICE;
         	int d1 = Integer.parseInt(inputArgs[1]);
@@ -51,6 +58,10 @@ public class Command {
     public int getArg2() {
     	return(arg2);
     }
+    
+    public String getFilename() {
+    	return(filename);
+    }
 
     public boolean isQuit() {
         return commandType == CommandType.QUIT;
@@ -72,7 +83,12 @@ public class Command {
 		return commandType == CommandType.DICE;
 	}
 	
+	public boolean isHint() {
+		return commandType == CommandType.HINT;
+	}
+	
 	public boolean isTest() {
 		return commandType == CommandType.TEST;
 	}
+	
 }

@@ -60,8 +60,10 @@ public class Game {
 				b.quit();
 			} else if (command.isPip()) {
 				b.pip();
+			} else if (command.isHint()) {
+				b.hint();
 			} else if (command.isMove()) {
-				if (rolled) {//IndexOutOfBoundsException NumberFormatException
+				if (rolled) {
 					if (die1.getVal()==die2.getVal()) {
 						System.out.println("Doubles! Go four times");
 						for (int i=0; i<=3; i++) {
