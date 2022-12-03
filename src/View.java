@@ -3,7 +3,7 @@ import java.util.Stack;
 
 public class View {
 	
-	public static void display(String currentPlayer, Board b) {
+	public static void display(boolean player1Going, Board b, Score score) {
 		ArrayList<Stack<Checker>> cols = b.getCols();
 		int maxTopHeight = 0;
 		int maxBottomHeight = 0;
@@ -47,7 +47,9 @@ public class View {
 			System.out.println("Black Reserve: " + cols.get(26).toString() + "\n");
 		if (!cols.get(27).empty())
 			System.out.println("White Reserve: " + cols.get(27).toString() + "\n");
-		System.out.println("Current Player: " + currentPlayer);
+		
+		System.out.println(score.toString());
+		System.out.println("Current Player: " +  (player1Going ? score.getPlayer1Name() + " (W)" : score.getPlayer2Name() + " (B)"));
 	}
 
 }

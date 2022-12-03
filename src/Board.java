@@ -3,6 +3,8 @@ import java.util.Stack;
 
 public class Board {
 	private ArrayList<Stack<Checker>> cols;
+	private boolean forfeit = false;
+	private boolean player1Win;
 	private static final int WHITE_HOME = 0;
 	private static final int BLACK_HOME = 25;
 	private static final int BLACK_RESERVE = 26;
@@ -37,10 +39,58 @@ public class Board {
 	}
 
 	public boolean checkWin() {
-		if (cols.get(WHITE_HOME).size() == 15 || cols.get(BLACK_HOME).size() == 15)
+		if (forfeit)
 			return(true);
+		else if (cols.get(WHITE_HOME).size() == 15) {
+			player1Win = true;
+			return(true);
+		}
+		else if (cols.get(BLACK_HOME).size() == 15) {
+			player1Win = false;
+			return(true);
+		}
 		else
 			return(false);
+	}
+	
+	public boolean getPlayer1Win() {
+		return(player1Win);
+	}
+	
+	public void forfeit(boolean player1Win) {
+		this.player1Win = player1Win;
+		forfeit = true;
+	}
+	
+	public int winMultiplier() {
+		if (forfeit)
+			return(1);
+		else if (player1Win && cols.get(BLACK_HOME).size()==0) {
+			if (cols.get(BLACK_RESERVE).size()!=0 || blackInWhiteHome()){
+				return(3);
+			} else
+				return(2);
+		} else if (!player1Win && cols.get(WHITE_HOME).size()==0) {
+			if (cols.get(WHITE_RESERVE).size()!=0 || whiteInBlackHome()){
+				return(3);
+			} else
+				return(2);
+		} else
+			return(1);
+	}
+	
+	private boolean blackInWhiteHome() {
+		for (int i=1; i<=6; i++)
+			if (!cols.get(i).empty() && cols.get(i).peek().isBlack())
+				return(true);
+		return(false);
+	}
+	
+	private boolean whiteInBlackHome() {
+		for (int i=19; i<=24; i++)
+			if (!cols.get(i).empty() && cols.get(i).peek().isWhite())
+				return(true);
+		return(false);
 	}
 	
 	public boolean start(String name1, String name2, Die die1, Die die2) {

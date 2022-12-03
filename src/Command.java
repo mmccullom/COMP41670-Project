@@ -1,6 +1,6 @@
 public class Command {
 
-    private enum CommandType {ROLL, QUIT, MOVE, PIP, DICE, TEST, HINT};
+    private enum CommandType {ROLL, QUIT, MOVE, PIP, DICE, DOUBLE, TEST, HINT};
 
     private CommandType commandType;
     
@@ -23,6 +23,8 @@ public class Command {
         	commandType = CommandType.PIP;
         } else if (inputFormatted.equals("H")) {
         	commandType = CommandType.HINT;
+        } else if (inputFormatted.equals("D")) {
+        	commandType = CommandType.DOUBLE;
         } else if (inputFormatted.equals("T")) {
         	commandType = CommandType.TEST;
         	filename = inputArgs[1];
@@ -89,6 +91,10 @@ public class Command {
 	
 	public boolean isTest() {
 		return commandType == CommandType.TEST;
+	}
+	
+	public boolean isDouble() {
+		return commandType == CommandType.DOUBLE;
 	}
 	
 }
