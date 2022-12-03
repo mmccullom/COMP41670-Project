@@ -1,3 +1,5 @@
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -27,11 +29,23 @@ public class GameLoop {
 	
 	public static void play(Board b, Score score, Die die1, Die die2,
 			Scanner scanner, boolean player1Going, boolean rolled) {
+		
+		Scanner reader = null;
+		Boolean testMode = false;
+		
 		while (!b.checkWin()) {
+			if (testMode)
+				if (!reader.hasNextLine())
+					testMode = false;
+			
 			System.out.print("\nEnter Command: ");
-
-			String entry = scanner.nextLine();
-
+			
+			String entry;
+			if (!testMode)
+				entry = scanner.nextLine();
+			else
+				entry = reader.nextLine();
+			
 			Command command = new Command(entry);
 			
 			if (command.isRoll()) {
@@ -41,10 +55,19 @@ public class GameLoop {
 				} else {
 					System.out.println("You have already rolled");
 				}
-			}
-			else if (command.isDice()) {
+			} else if (command.isDice()) {
 				b.dice(die1, die2, command.getArg1(), command.getArg2());
 				rolled = true;
+			} else if (command.isTest()) {
+				String filename = command.getFilename();
+				try {
+					File file = new File(filename);
+					reader = new Scanner(file);
+					System.out.println("\nEntering Test Mode, errors in test file may cause crash");
+					testMode = true;
+				} catch (FileNotFoundException e) {
+					System.out.println("File does not exist");
+				}
 			} else if (command.isQuit()) {
 				b.quit();
 			} else if (command.isPip()) {
@@ -63,7 +86,11 @@ public class GameLoop {
 								break;
 							} else {
 								System.out.print("\nSelect a move by number: ");
-								int selection = getInteger(scanner, moves);
+								int selection;
+								if (!testMode)
+									selection = getInteger(scanner, moves);
+								else
+									selection = Integer.parseInt(reader.nextLine());
 								b.move(moves.get(selection-1));
 								if(i!=3)
 									View.display(player1Going, b, score);
@@ -79,7 +106,11 @@ public class GameLoop {
 							scanner.nextLine();
 						} else {
 							System.out.print("\nSelect a move by number: ");
-							int selection = getInteger(scanner, moves);
+							int selection;
+							if (!testMode)
+								selection = getInteger(scanner, moves);
+							else
+								selection = Integer.parseInt(reader.nextLine());
 							Move firstMove = moves.get(selection-1);						
 							b.move(firstMove);
 							View.display(player1Going, b, score);
@@ -94,7 +125,11 @@ public class GameLoop {
 								scanner.nextLine();
 							} else {
 								System.out.print("\nSelect a move by number: ");
-								int selection2 = getInteger(scanner, moves2);
+								int selection2;
+								if (!testMode)
+									selection2 = getInteger(scanner, moves2);
+								else
+									selection2 = Integer.parseInt(reader.nextLine());
 								Move secondMove = moves2.get(selection2-1);
 								b.move(secondMove);	
 							}
@@ -112,7 +147,11 @@ public class GameLoop {
 					if ((player1Going && !score.getPlayer2HasCube()) | (!player1Going && !score.getPlayer1HasCube())) {
 						System.out.println((player1Going ? score.getPlayer2Name() : score.getPlayer1Name()) + ", you have been offered a double");
 						System.out.print("Do you choose to accept (A) or refuse and forfeit (R): ");
-						String selection = getString(scanner);
+						String selection;
+						if (!testMode)
+							selection = getString(scanner);
+						else
+							selection = reader.nextLine();
 						if (selection.equals("A")) {
 							score.doubleStake();
 							if (player1Going)

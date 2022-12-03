@@ -11,40 +11,42 @@ public class Command {
     private String filename = "";
 
     public Command (String input) {
-        String inputFormatted = input.trim().toUpperCase().substring(0,1);
-        String[] inputArgs = input.split(" ");
-        if (inputFormatted.equals("Q")) {
-            commandType = CommandType.QUIT;
-        } else if (inputFormatted.equals("R")) {
-            commandType = CommandType.ROLL;
-        } else if (inputFormatted.equals("M")) {
-        	commandType = CommandType.MOVE;
-        } else if (inputFormatted.equals("P")) {
-        	commandType = CommandType.PIP;
-        } else if (inputFormatted.equals("H")) {
-        	commandType = CommandType.HINT;
-        } else if (inputFormatted.equals("D")) {
-        	commandType = CommandType.DOUBLE;
-        } else if (inputFormatted.equals("T")) {
-        	commandType = CommandType.TEST;
-        	filename = inputArgs[1];
-        } else if (inputFormatted.equals("D")) {
-        	commandType = CommandType.DICE;
-        	int d1 = Integer.parseInt(inputArgs[1]);
-        	if (d1>0 && d1<7) {
-        		arg1 = d1;
-        	}
-        	int d2 = Integer.parseInt(inputArgs[2]);
-        	if (d2>0 && d1<7) {
-        		arg2 = d2;
-        	}
-        	
-        } else if (inputFormatted.equals("T")) {
-        	
-        }
-        else{
-            System.out.println("\nInvalid Command");
-        }
+    	if (input.isEmpty()) {
+    		System.out.println("\nInvalid Command");
+    	} else {
+	        String inputFormatted = input.trim().toUpperCase().substring(0,1);
+	        String[] inputArgs = input.split(" ");
+	        if (inputFormatted.equals("Q")) {
+	            commandType = CommandType.QUIT;
+	        } else if (inputFormatted.equals("R")) {
+	            commandType = CommandType.ROLL;
+	        } else if (inputFormatted.equals("M")) {
+	        	commandType = CommandType.MOVE;
+	        } else if (inputFormatted.equals("P")) {
+	        	commandType = CommandType.PIP;
+	        } else if (inputFormatted.equals("H")) {
+	        	commandType = CommandType.HINT;
+	        } else if (inputArgs[0].toUpperCase().equals("DICE")) {
+	        	commandType = CommandType.DICE;
+	        	int d1 = Integer.parseInt(inputArgs[1]);
+	        	if (d1>0 && d1<7) {
+	        		arg1 = d1;
+	        	}
+	        	int d2 = Integer.parseInt(inputArgs[2]);
+	        	if (d2>0 && d1<7) {
+	        		arg2 = d2;
+	        	}
+	        	
+	        } else if (inputFormatted.equals("D")) {
+	        	commandType = CommandType.DOUBLE;
+	        } else if (inputFormatted.equals("T")) {
+	        	commandType = CommandType.TEST;
+	        	filename = inputArgs[1];
+	        }
+	        else{
+	            System.out.println("\nInvalid Command");
+	        }
+    	}
     }
 
     public boolean isValid (String input) {
