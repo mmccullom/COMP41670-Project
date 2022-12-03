@@ -24,6 +24,15 @@ class CommandTest {
         assertFalse(inputCommand.isValid("randomInput"));
     }
 
+/*
+    @Test
+    void isValidCommandFunctionThrowsExeptionForRandomInput(){
+        assertThrows(Invalid)
+        assertFalse(inputCommand.isValid("a"));
+        assertFalse(inputCommand.isValid("randomInput"));
+    }
+*/
+
 
     @Test
     void isQuitReturnsTrueForInputQ(){
@@ -174,6 +183,14 @@ class CommandTest {
         Command inputCommand2 = new Command("d 11 21");
         assertEquals(-1, inputCommand2.getArg2());
     }
+
+    @Test
+    void getFilenameReturnsTheFilenameIfInputIsTFollowedByTheFilename(){
+        Command inputCommand = new Command("t sampleFilename.txt");
+        assertEquals("sampleFilename.txt", inputCommand.getFilename());
+    }
+
+
 
 
 }
