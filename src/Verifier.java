@@ -3,6 +3,7 @@ import java.util.Stack;
 
 public class Verifier {
 
+	
 	public static ArrayList<Move> checkMoves(ArrayList<Stack<Checker>> cols, int d1, boolean isBlack) {
 		ArrayList<Move> validMoves = new ArrayList<Move>();
 		boolean d1HomeMove=false;
