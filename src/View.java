@@ -48,7 +48,7 @@ public class View {
 		if (!cols.get(27).empty())
 			System.out.println("White Reserve: " + cols.get(27).toString() + "\n");
 		
-		System.out.println(score.toString());
+		System.out.println(score.toStringWithStake());
 		System.out.println("Current Player: " +  (player1Going ? score.getPlayer1Name() + " (W)" : score.getPlayer2Name() + " (B)"));
 	}
 

@@ -66,31 +66,17 @@ public class Board {
 		if (forfeit)
 			return(1);
 		else if (player1Win && cols.get(BLACK_HOME).size()==0) {
-			if (cols.get(BLACK_RESERVE).size()!=0 || blackInWhiteHome()){
+			if (cols.get(BLACK_RESERVE).size()!=0 || Verifier.blackInWhiteHome(cols)){
 				return(3);
 			} else
 				return(2);
 		} else if (!player1Win && cols.get(WHITE_HOME).size()==0) {
-			if (cols.get(WHITE_RESERVE).size()!=0 || whiteInBlackHome()){
+			if (cols.get(WHITE_RESERVE).size()!=0 || Verifier.whiteInBlackHome(cols)){
 				return(3);
 			} else
 				return(2);
 		} else
 			return(1);
-	}
-	
-	private boolean blackInWhiteHome() {
-		for (int i=1; i<=6; i++)
-			if (!cols.get(i).empty() && cols.get(i).peek().isBlack())
-				return(true);
-		return(false);
-	}
-	
-	private boolean whiteInBlackHome() {
-		for (int i=19; i<=24; i++)
-			if (!cols.get(i).empty() && cols.get(i).peek().isWhite())
-				return(true);
-		return(false);
 	}
 	
 	public boolean start(String name1, String name2, Die die1, Die die2) {

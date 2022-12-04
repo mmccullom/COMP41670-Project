@@ -5,13 +5,22 @@ public class Verifier {
 
 	public static ArrayList<Move> checkMoves(ArrayList<Stack<Checker>> cols, int d1, boolean isBlack) {
 		ArrayList<Move> validMoves = new ArrayList<Move>();
+		boolean d1HomeMove=false;
 		if (isBlack) {
 			for (int i=1; i<=24; i++) {
 				if(!cols.get(i).empty() && (cols.get(i).peek().isBlack() == isBlack)) {
 					// First die moves
-					if(i+d1 > 24) {
-						if (isBlackFull(cols))
+					if(i+d1 == 25) {
+						if (isBlackFull(cols)) {
 							validMoves.add(new Move(i, 25, false, true));
+							d1HomeMove=true;
+							}
+						}
+					else if(i+d1 > 25) {
+						if (isBlackFull(cols) && d1HomeMove == false) {
+							validMoves.add(new Move(i, 25, false, true));
+							d1HomeMove=true;
+							}
 						}
 					else if (cols.get(i+d1).empty())
 						validMoves.add(new Move(i, i+d1, false, true));
@@ -24,10 +33,18 @@ public class Verifier {
 			} else {
 				for(int i=24; i>=1; i--) {
 					if(!cols.get(i).empty() && (cols.get(i).peek().isBlack() == isBlack)) {
-						if(i-d1 < 1) {
-							if (isWhiteFull(cols))
+						if(i-d1 == 0) {
+							if (isWhiteFull(cols)) {
 								validMoves.add(new Move(i, 0, false, true));
+								d1HomeMove = true;
+								}
 							}
+						else if(i-d1 < 0) {
+							if (isWhiteFull(cols) && d1HomeMove == false) {
+								validMoves.add(new Move(i, 0, false, true));
+								d1HomeMove = true;
+							}
+						}
 						else if (cols.get(i-d1).empty())
 							validMoves.add(new Move(i, i-d1, false, true));
 						else if (cols.get(i-d1).peek().isBlack() == isBlack)
@@ -42,13 +59,23 @@ public class Verifier {
 	
 	public static ArrayList<Move> checkMoves(ArrayList<Stack<Checker>> cols, int d1, int d2, boolean isBlack) {
 		ArrayList<Move> validMoves = new ArrayList<Move>();
+		boolean d1HomeMove = false;
+		boolean d2HomeMove = false;
 		if (isBlack) {
 			for (int i=1; i<=24; i++) {
 				if(!cols.get(i).empty() && (cols.get(i).peek().isBlack() == isBlack)) {
 					// First die moves
-					if(i+d1 > 24) {
-						if (isBlackFull(cols))
+					if(i+d1 == 25) {
+						if (isBlackFull(cols)) {
 							validMoves.add(new Move(i, 25, false, true));
+							d1HomeMove=true;
+							}
+						}
+					else if(i+d1 > 25) {
+						if (isBlackFull(cols) && d1HomeMove == false) {
+							validMoves.add(new Move(i, 25, false, true));
+							d1HomeMove=true;
+							}
 						}
 					else if (cols.get(i+d1).empty())
 						validMoves.add(new Move(i, i+d1, false, true));
@@ -60,9 +87,17 @@ public class Verifier {
 					
 					
 					// Second die moves
-					if(i+d2 > 24) {
-						if (isBlackFull(cols))
+					if(i+d2 == 25) {
+						if (isBlackFull(cols)) {
 							validMoves.add(new Move(i, 25, false, false));
+							d2HomeMove=true;
+							}
+						}
+					else if(i+d2 > 25) {
+						if (isBlackFull(cols) && d2HomeMove == false) {
+							validMoves.add(new Move(i, 25, false, false));
+							d2HomeMove=true;
+							}
 						}
 					else if (cols.get(i+d2).empty())
 						validMoves.add(new Move(i, i+d2, false, false));
@@ -75,10 +110,18 @@ public class Verifier {
 			} else {
 				for(int i=24; i>=1; i--) {
 					if(!cols.get(i).empty() && (cols.get(i).peek().isBlack() == isBlack)) {
-						if(i-d1 < 1) {
-							if (isWhiteFull(cols))
+						if(i-d1 == 0) {
+							if (isWhiteFull(cols)) {
 								validMoves.add(new Move(i, 0, false, true));
+								d1HomeMove = true;
+								}
 							}
+						else if(i-d1 < 0) {
+							if (isWhiteFull(cols) && d1HomeMove == false) {
+								validMoves.add(new Move(i, 0, false, true));
+								d1HomeMove = true;
+							}
+						}
 						else if (cols.get(i-d1).empty())
 							validMoves.add(new Move(i, i-d1, false, true));
 						else if (cols.get(i-d1).peek().isBlack() == isBlack)
@@ -90,10 +133,18 @@ public class Verifier {
 						
 						
 						// Second die moves
-						if(i-d2 < 1) {
-								if (isWhiteFull(cols))
-									validMoves.add(new Move(i, 0, false, false));
+						if(i-d2 == 0) {
+							if (isWhiteFull(cols)) {
+								validMoves.add(new Move(i, 0, false, false));
+								d2HomeMove = true;
 								}
+							}
+						else if(i-d2 < 0) {
+							if (isWhiteFull(cols) && d2HomeMove == false) {
+								validMoves.add(new Move(i, 0, false, false));
+								d2HomeMove = true;
+							}
+						}
 						else if (cols.get(i-d2).empty())
 							validMoves.add(new Move(i, i-d2, false, false));
 						else if (cols.get(i-d2).peek().isBlack() == isBlack)
@@ -168,6 +219,19 @@ public class Verifier {
 		return(validMoves);
 	}
 	
+	public static boolean blackInWhiteHome(ArrayList<Stack<Checker>> cols) {
+		for (int i=1; i<=6; i++)
+			if (!cols.get(i).empty() && cols.get(i).peek().isBlack())
+				return(true);
+		return(false);
+	}
+	
+	public static boolean whiteInBlackHome(ArrayList<Stack<Checker>> cols) {
+		for (int i=19; i<=24; i++)
+			if (!cols.get(i).empty() && cols.get(i).peek().isWhite())
+				return(true);
+		return(false);
+	}
 	
 	private static boolean isBlackFull(ArrayList<Stack<Checker>> cols) {
 		int count = 0;
@@ -178,7 +242,6 @@ public class Verifier {
 		}
 		return(count==(15-cols.get(25).size()));
 	}
-	
 	
 	private static boolean isWhiteFull(ArrayList<Stack<Checker>> cols) {
 		int count = 0;

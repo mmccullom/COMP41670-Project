@@ -7,8 +7,9 @@ public class Score {
 	private boolean player1HasCube;
 	private boolean player2HasCube;
 	private int stake;
+	private int length;
 	
-	public Score(String name1, String name2) {
+	public Score(String name1, String name2, int l) {
 		player1Score = 0;
 		player2Score = 0;
 		player1Name = name1;
@@ -16,6 +17,7 @@ public class Score {
 		player1HasCube = false;
 		player2HasCube = false;
 		stake = 1;
+		length = l;
 	}
 	
 	public int getPlayer1Score() {
@@ -70,16 +72,28 @@ public class Score {
 	}
 	
 	public void givePlayer2Cube() {
-		player2HasCube = false;
+		player1HasCube = false;
 		player2HasCube = true;
+	}
+	
+	public int getLength() {
+		return(length);
 	}
 
 	public String toString() {
 		return  (getPlayer1HasCube() ? "[D] " : "") + 
 				getPlayer1Name() + ": " + getPlayer1Score() + " | "
 				+ (getPlayer2HasCube() ? "[D] " : "") + getPlayer2Name()
-				+ ": " + getPlayer2Score()+ " | Current Stake: " + getStake() + "\n";
+				+ ": " + getPlayer2Score() + " | Match Length: " + length +"\n";
 		
+	}
+	
+	public String toStringWithStake() {
+		return  (getPlayer1HasCube() ? "[D] " : "") + 
+				getPlayer1Name() + ": " + getPlayer1Score() + " | "
+				+ (getPlayer2HasCube() ? "[D] " : "") + getPlayer2Name()
+				+ ": " + getPlayer2Score()+ " | Current Stake: " + getStake()
+				+ " | Match Length: " + length + "\n";
 	}
 	
 }
