@@ -2,20 +2,16 @@ import org.junit.Rule;
 import org.junit.contrib.java.lang.system.TextFromStandardInputStream;
 import org.junit.jupiter.api.Test;
 
-
 import java.util.Scanner;
 
 import static org.junit.contrib.java.lang.system.TextFromStandardInputStream.emptyStandardInputStream;
 import static org.junit.jupiter.api.Assertions.*;
 
-
-
-class GameLoopTest {
+class GameTest {
 
     @Rule
     public final TextFromStandardInputStream systemInMock = emptyStandardInputStream();
-    GameLoop loop1 = new GameLoop();
-
+    Game loop1 = new Game();
 
     @Test
     void CheckGetStringOnlyWorksForInputROrA(){
@@ -30,6 +26,4 @@ class GameLoopTest {
         assertEquals("R", loop1.getString(scanner4));
 
     }
-
-
-    }
+}
