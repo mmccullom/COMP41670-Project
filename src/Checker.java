@@ -3,10 +3,12 @@ public class Checker {
 	private boolean black;
 	private boolean white;
 
-	public Checker() {
-		black = true;
-	}
-
+	/**
+	 * Create checker object in one of two colors
+	 * 
+	 * @param color			Must be 'b' or 'w' 
+	 * @throws Exception	Thrown when color parameter is invalid
+	 */
 	public Checker(char color) throws Exception{
 		if (color == 'w') {
 			black = false;

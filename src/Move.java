@@ -11,13 +11,22 @@ public class Move {
 	private static final int WHITE_RESERVE = 27;
 	
 	
+	/**
+	 * Constructor for a move, validation does not take place here but
+	 * rather in the validation class
+	 * 
+	 * @param srcCol			Checker source column
+	 * @param destCol			Checker destination column
+	 * @param removeOpponent	Will the move remove the opponent?
+	 * @param d1				Was first die used?
+	 */
 	public Move(int srcCol, int destCol, boolean removeOpponent, boolean d1) {
 		this.srcCol = srcCol;
 		this.destCol = destCol;
 		this.removeOpponent = removeOpponent;
 		this.dieOne = d1;
 	}
-	
+
 	public int getSrcCol() {
 		return(srcCol);
 	}
@@ -26,6 +35,7 @@ public class Move {
 		return(destCol);
 	}
 	
+	@Override
 	public String toString() {
 		
 		String source;

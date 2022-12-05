@@ -10,6 +10,11 @@ public class Command {
     
     private String filename = "";
 
+    /**
+     * Create command from the input value, only valid commands created
+     * 
+     * @param input Command type
+     */
     public Command (String input) {
     	if (input.isEmpty()) {
     		System.out.println("\nInvalid Command");
@@ -49,12 +54,6 @@ public class Command {
     	}
     }
 
-    public boolean isValid (String input) {
-        String inputFormatted = input.trim().toUpperCase();
-        return  inputFormatted.equals("Q") ||
-                inputFormatted.equals("R");
-    }
-    
     public int getArg1() {
     	return(arg1);
     }
