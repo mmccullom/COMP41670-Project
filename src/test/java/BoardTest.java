@@ -5,9 +5,6 @@ import java.io.PrintStream;
 
 class BoardTest {
 
-
-    //@BeforeEach
-    //void boardSetup() {
         Board b;
         {
             try {
@@ -16,7 +13,6 @@ class BoardTest {
                 throw new RuntimeException(e);
             }
         }
-
 
 
     @Test
@@ -32,7 +28,6 @@ class BoardTest {
         Die die1 = new Die();
         Die die2 = new Die();
 
-        String output = new String();
 
         boolean test;
         int roll1 = 1;
@@ -61,8 +56,8 @@ class BoardTest {
             roll1 = first - '0'; // gives the int value of first dice roll
             roll2 = second - '0'; // gives the int value of first dice roll
 
-            String str = "player1 rolls " + roll1 + "\r\n" + "player2 rolls " + roll2 + "\r\n" + "player1 Goes First\n";
-            String str2 = "player1 rolls " + roll1 + "\r\n" + "player2 rolls " + roll2 + "\r\n" + "player2 Goes First\n";
+            String str = "player1 rolls " + roll1 + "\r\n" + "player2 rolls " + roll2 + "\r\n" + "player1 Goes First\r\n";
+            String str2 = "player1 rolls " + roll1 + "\r\n" + "player2 rolls " + roll2 + "\r\n" + "player2 Goes First\r\n";
 
             if (roll1 > roll2) {
                 assertEquals(str, baos.toString());
@@ -99,13 +94,5 @@ class BoardTest {
     }
 
 
-    //To test the system exit requires lots of complicated logic
-/*
-    @Test
-    void TestGameQuitQuitsSuccessfully{
-            assertEquals(System.exit(0),b.quit());
-    }
-
-*/
 
 }

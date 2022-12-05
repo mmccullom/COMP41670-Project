@@ -24,30 +24,7 @@ class VerifierTest {
         assertTrue(vf.whiteInBlackHome(b.getCols()));
     }
 
-    /*
 
-    @Test
-    void checkWhiteInBlackHomeReturnsFalseWhenBlackColumnIsEmpty(){
-
-        var cols = b.getCols();
-        //cols.clear();
-        Checker checker1 = null;
-        try {
-            checker1 = new Checker('b');
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-
-        //for (int i=19; i<=24; i++)
-
-            cols.get(24).remove(1);
-
-            //cols.get(25).remove(1);
-
-
-        assertFalse(Verifier.whiteInBlackHome(b.getCols()));
-    }
-*/
     @Test
     void checkBlacksInWhiteHomeReturnsTrueWhenBoardInitialised(){
         Board b;
@@ -59,7 +36,6 @@ class VerifierTest {
             }
         }
         assertTrue(Verifier.blackInWhiteHome(b.getCols()));
-
     }
 
 

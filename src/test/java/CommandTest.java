@@ -4,34 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class CommandTest {
 
-    Command inputCommand = new Command("random");
-
-    @Test
-    void isValidCommandFunctionReturnsTrueForInputR(){
-        assertTrue(inputCommand.isValid("r"));
-        assertTrue(inputCommand.isValid("R"));
-    }
-
-    @Test
-    void isValidCommandFunctionReturnsTrueForInputQ(){
-        assertTrue(inputCommand.isValid("q"));
-        assertTrue(inputCommand.isValid("Q"));
-    }
-
-    @Test
-    void isValidCommandFunctionReturnsFalseForRandomInput(){
-        assertFalse(inputCommand.isValid("a"));
-        assertFalse(inputCommand.isValid("randomInput"));
-    }
-
-/*
-    @Test
-    void isValidCommandFunctionThrowsExeptionForRandomInput(){
-        assertThrows(Invalid)
-        assertFalse(inputCommand.isValid("a"));
-        assertFalse(inputCommand.isValid("randomInput"));
-    }
-*/
+    //Command inputCommand = new Command("random");
 
 
     @Test
@@ -44,8 +17,6 @@ class CommandTest {
 
     @Test
     void isQuitReturnsFalseForRandomInput(){
-        Command inputCommand = new Command("T 2 4");
-        assertFalse(inputCommand.isQuit());
         Command inputCommand4 = new Command("h");
         assertFalse(inputCommand4.isQuit());
     }
@@ -64,8 +35,6 @@ class CommandTest {
     void isRollReturnsFalseForRandomInput(){
         Command inputCommand = new Command("h");
         assertFalse(inputCommand.isRoll());
-        Command inputCommand2 = new Command("9");
-        assertFalse(inputCommand2.isRoll());
     }
 
     @Test
@@ -78,8 +47,6 @@ class CommandTest {
 
     @Test
     void isMoveReturnsFalseForRandomInput(){
-        Command inputCommand = new Command("1");
-        assertFalse(inputCommand.isMove());
         Command inputCommand2 = new Command("p");
         assertFalse(inputCommand2.isMove());
     }
@@ -96,18 +63,18 @@ class CommandTest {
 
     @Test
     void isPipReturnsFalseForRandomInput(){
-        Command inputCommand = new Command("f");
+        Command inputCommand = new Command("r");
         assertFalse(inputCommand.isPip());
-        Command inputCommand2 = new Command("u");
+        Command inputCommand2 = new Command("h");
         assertFalse(inputCommand2.isPip());
     }
 
 
     @Test
     void isDiceReturnsTrueForInputDAndTwoNumbers(){
-        Command inputCommand = new Command("d 1 2");
+        Command inputCommand = new Command("DICE 5 6");
         assertTrue(inputCommand.isDice());
-        Command inputCommand2 = new Command("D 1 5");
+        Command inputCommand2 = new Command("Dice 1 5");
         assertTrue(inputCommand2.isDice());
     }
 
@@ -154,9 +121,9 @@ class CommandTest {
 
     @Test
     void getArg1ReturnsTheFirstIntegerIfLessThan7(){
-        Command inputCommand = new Command("d 1 5");
+        Command inputCommand = new Command("dice 1 5");
         assertEquals(1, inputCommand.getArg1());
-        Command inputCommand2 = new Command("d 6 2");
+        Command inputCommand2 = new Command("DICE 6 2");
         assertEquals(6, inputCommand2.getArg1());
     }
 
@@ -170,9 +137,9 @@ class CommandTest {
 
     @Test
     void getArg2ReturnsTheFirstIntegerIfLessThan7(){
-        Command inputCommand = new Command("d 1 5");
+        Command inputCommand = new Command("dice 1 5");
         assertEquals(5, inputCommand.getArg2());
-        Command inputCommand2 = new Command("d 6 2");
+        Command inputCommand2 = new Command("DICE 6 2");
         assertEquals(2, inputCommand2.getArg2());
     }
 

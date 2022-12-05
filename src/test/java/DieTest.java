@@ -31,14 +31,6 @@ class DieTest {
         assertEquals(1,dice.getVal());
     }
 
-    /*
-    @Test
-    void CheckSetValDoesNotSetAValueOverSix(){
-        dice.setVal(7);
-        assertEquals(6,dice.getVal());
-    }
-    */
-
 
 
 }
