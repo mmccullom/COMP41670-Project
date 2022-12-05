@@ -7,8 +7,8 @@ public class Match {
 	/**
 	 * Main method for the entire match, asks if players wish to repeat at match conclusion
 	 * 
-	 * @param args Main method args
-	 * @throws Exception Exception necessary for potential issues in board creation
+	 * @param args 			Main method args
+	 * @throws Exception 	Exception necessary for potential issues in board creation
 	 */
 	public static void main(String[] args) throws Exception {
 		System.out.println("Welcome to Backgammon");
@@ -44,6 +44,7 @@ public class Match {
 			
 			Game.play(b, score, die1, die2, scanner, player1Going, rolled);
 			
+			// Player 1 wins the previous game
 			if (b.getPlayer1Win()) {
 				System.out.println(player1 + " Wins the game!");
 				int multiplier = b.winMultiplier();
@@ -53,6 +54,8 @@ public class Match {
 					System.out.println("Backgammon Win! x3 Points");
 				score.incrementPlayer1Score(multiplier);
 			}
+			
+			// Player 2 wins the previous game
 			else {
 				System.out.println(player2 + " Wins the game!");
 				int multiplier = b.winMultiplier();
@@ -64,6 +67,7 @@ public class Match {
 			}
 			System.out.print(score.toString());
 			
+			// Match conclusion
 			if (score.getPlayer1Score() >= matchLength || score.getPlayer2Score() >= matchLength) {
 				if (b.getPlayer1Win())
 					System.out.println(player1 + " Wins the match!");

@@ -5,6 +5,13 @@ import java.util.Scanner;
 
 public class Game {
 	
+	/**
+	 * Method requests player for a valid integer in the moves list until they provide it
+	 * 
+	 * @param scanner 	Scanner object to input integer
+	 * @param moves 	Valid moves for the turn
+	 * @return			First valid integer entered
+	 */
 	public static int getInteger(Scanner scanner, ArrayList<Move> moves) {
 		int selection = 0;
 		try {
@@ -17,6 +24,13 @@ public class Game {
 		return (selection);
 	}
 	
+	/**
+	 * Method to obtain player decision on doubling
+	 * 
+	 * @param scanner	Scanner object to input integer
+	 * @return			First valid response
+	 */
+	
 	public static String getString(Scanner scanner) {
 		String selection = scanner.nextLine().toUpperCase().substring(0,1);
 		if ("A".equals(selection) | "R".equals(selection))
@@ -27,6 +41,19 @@ public class Game {
 		}
 	}
 	
+	/**
+	 * Obtains all of the over-arching data from the match to run the main game loop
+	 * until the game has been completed.
+	 * 
+	 * @param b 			Board object from match
+	 * @param score			Score object from match
+	 * @param die1			First die object from match
+	 * @param die2			Second die object from match
+	 * @param scanner		Scanner from match
+	 * @param player1Going	Status of first player going from match
+	 * @param rolled		Status of first die roll from match
+	 */
+	
 	public static void play(Board b, Score score, Die die1, Die die2,
 			Scanner scanner, boolean player1Going, boolean rolled) {
 		
@@ -34,6 +61,8 @@ public class Game {
 		Boolean testMode = false;
 		
 		while (!b.checkWin()) {
+			
+			// Stipulation for when reading from a file
 			if (testMode)
 				if (!reader.hasNextLine())
 					testMode = false;
@@ -76,6 +105,8 @@ public class Game {
 				b.hint();
 			} else if (command.isMove()) {
 				if (rolled) {
+					
+					// Scenario when rolling doubles
 					if (die1.getVal()==die2.getVal()) {
 						System.out.println("Doubles! Go four times");
 						for (int i=0; i<=3; i++) {
@@ -99,6 +130,8 @@ public class Game {
 						rolled = false;
 						player1Going = !player1Going;
 						View.display(player1Going, b, score);
+						
+					// Scenario when not rolling doubles
 					} else {
 						ArrayList<Move> moves = b.list(die1, die2, player1Going);
 						if (moves.isEmpty()) {

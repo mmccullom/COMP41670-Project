@@ -11,6 +11,12 @@ public class Board {
 	private static final int WHITE_RESERVE = 27;
 	private static final int COL_NUM = 28;
 
+	/**
+	 * Creates the default setup for the Backgammon board with checkers in
+	 * the necessary locations 
+	 * 
+	 * @throws Exception Necessary for checker creation
+	 */
 	public Board() throws Exception {
 		cols = new ArrayList<>();
 		for (int i=0; i < COL_NUM; i++) {
@@ -37,7 +43,12 @@ public class Board {
 			cols.get(19).add(new Checker('b'));
 		}
 	}
-
+	
+	/**
+	 * Check if the game has been completed
+	 * 
+	 * @return Whether or not a player has won the game
+	 */
 	public boolean checkWin() {
 		if (forfeit)
 			return(true);
@@ -53,15 +64,30 @@ public class Board {
 			return(false);
 	}
 	
+	/**
+	 * Check which player 1
+	 * 
+	 * @return Did player 1 win?
+	 */
 	public boolean getPlayer1Win() {
 		return(player1Win);
 	}
 	
+	/**
+	 * Set the end of the game due to a forfeit
+	 * 
+	 * @param player1Win Did player1 win?
+	 */
 	public void forfeit(boolean player1Win) {
 		this.player1Win = player1Win;
 		forfeit = true;
 	}
 	
+	/**
+	 * Determine whether the game was a single, gammon, or Backgammon
+	 * 
+	 * @return 1x, 2x, 3x depending on final results of the game
+	 */
 	public int winMultiplier() {
 		if (forfeit)
 			return(1);
@@ -79,6 +105,15 @@ public class Board {
 			return(1);
 	}
 	
+	/**
+	 * Determine which player is starting the game, continue rolling in case of a tie
+	 * 
+	 * @param name1	Player 1 name
+	 * @param name2	Player 2 name
+	 * @param die1	Die 1 object
+	 * @param die2	Die 2 object
+	 * @return		Is player 1 starting play
+	 */
 	public boolean start(String name1, String name2, Die die1, Die die2) {
 		int val1 = die1.roll();
 		int val2 = die2.roll();
@@ -95,6 +130,12 @@ public class Board {
 		}
 	}
 	
+	/**
+	 * Roll both dice and display the results
+	 * 
+	 * @param die1 Die 1 object
+	 * @param die2 Die 2 object
+	 */
 	public void roll(Die die1, Die die2) {
 		int val1 = die1.roll();
 		int val2 = die2.roll();
@@ -102,6 +143,14 @@ public class Board {
 		System.out.print("Die 1: "+ val1 + "\nDie 2: " + val2 + "\n");
 	}
 	
+	/**
+	 * Set dice values for testing purposes
+	 * 
+	 * @param die1		Die 1 object
+	 * @param die2		Die 2 object
+	 * @param newVal1	Die 1 new value
+	 * @param newVal2	Die 2 new value
+	 */
 	public void dice(Die die1, Die die2, int newVal1, int newVal2) {
 		die1.setVal(newVal1);
 		die2.setVal(newVal2);
@@ -109,11 +158,19 @@ public class Board {
 		System.out.print("Die 1: "+ die1.getVal() + "\nDie 2: " + die2.getVal() + "\n");
 	}
 	
+	/**
+	 * Quit match
+	 */
 	public void quit() {
 		System.out.println("Exiting Game");
 		System.exit(0);
 	}
 	
+	/**
+	 * Perform the selected move on the board
+	 * 
+	 * @param m The move to be performed
+	 */
 	public void move(Move m) {
 		if (m.getRemoveOpponent()) {
 			Checker moving = cols.get(m.getDestCol()).pop();
@@ -127,6 +184,14 @@ public class Board {
 		}
 	}
 	
+	/**
+	 * Determine all valid moves for the player with two die
+	 * 
+	 * @param die1			Die 1 object
+	 * @param die2			Die 2 object
+	 * @param player1Going	Is player 1 going?
+	 * @return				List of valid moves for the dice values
+	 */
 	public ArrayList<Move> list(Die die1, Die die2, boolean player1Going) {
 		ArrayList<Move> moves;
 		if (player1Going && !cols.get(WHITE_RESERVE).empty())
@@ -143,6 +208,12 @@ public class Board {
 		return(moves);
 	}
 	
+	/**
+	 * Determine all valid moves for the player with one die
+	 * @param die1			Die 1 object
+	 * @param player1Going	Is player 1 going?
+	 * @return				List of valid moves for the die value
+	 */
 	public ArrayList<Move> list(Die die1, boolean player1Going) {
 		ArrayList<Move> moves;
 		if (player1Going && !cols.get(WHITE_RESERVE).empty())
@@ -159,6 +230,9 @@ public class Board {
 		return(moves);
 	}
 	
+	/**
+	 * Return remaining pip count for both players
+	 */
 	public void pip() {
 		int blackCount = 0;
 		int whiteCount = 0;
@@ -173,6 +247,9 @@ public class Board {
 		System.out.println("Black Pip: " + blackCount + "\nWhite Pipe: " + whiteCount);
 	}
 	
+	/**
+	 * Print all possible commands excluding test commands
+	 */
 	public void hint() {
 		String[] nonTestCommands = {"ROLL (R)", "QUIT (Q)", "MOVE (M)", "PIP (P)", "HINT (H)"};
 		for (String s : nonTestCommands) {

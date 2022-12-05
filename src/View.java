@@ -3,6 +3,13 @@ import java.util.Stack;
 
 public class View {
 	
+	/**
+	 * Method for displaying board and score each turn
+	 * 
+	 * @param player1Going 	Is player 1 going?
+	 * @param b				Current board object
+	 * @param score			Current score object
+	 */
 	public static void display(boolean player1Going, Board b, Score score) {
 		ArrayList<Stack<Checker>> cols = b.getCols();
 		int maxTopHeight = 0;
