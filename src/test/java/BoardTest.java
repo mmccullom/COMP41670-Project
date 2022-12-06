@@ -17,17 +17,14 @@ class BoardTest {
 
     @Test
     void CheckWinReturnsFalseWhenGameNotWon(){
-        //unsure how to get board into winning state to test the opposite!!
         assertFalse(b.checkWin());
     }
 
 
-    //update test when figure out how to manually set results of dice roll
     @Test
     void CheckStartReturnsTrueWhenPlayer1RollsHigher() {
         Die die1 = new Die();
         Die die2 = new Die();
-
 
         boolean test;
         int roll1 = 1;
@@ -36,9 +33,9 @@ class BoardTest {
             // Create a stream to hold the output
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             PrintStream ps = new PrintStream(baos);
-            // IMPORTANT: Save the old System.out!
+            // Save the old System.out!
             PrintStream old = System.out;
-            // Tell Java to use your special stream
+            // Tell Java to use special stream
             System.setOut(ps);
             // Use dice command to print output to special stream
             test = b.start("player1", "player2", die1, die2);
@@ -47,7 +44,6 @@ class BoardTest {
             System.setOut(old);
             // Comparing output string to expected string...
             var check = baos.toString();
-
             var charArray = check.toCharArray();
 
             var first = charArray[14];
@@ -67,19 +63,19 @@ class BoardTest {
         }
     }
 
+
     @Test
     void CheckManualSettingOfDiceWorks(){
         Die die1 = new Die();
         Die die2 = new Die();
         String output = new String();
 
-
         // Create a stream to hold the output
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         PrintStream ps = new PrintStream(baos);
-        // IMPORTANT: Save the old System.out!
+        // Save the old System.out!
         PrintStream old = System.out;
-        // Tell Java to use your special stream
+        // Tell Java to use our special stream
         System.setOut(ps);
         // Use dice command to print output to special stream
         b.dice(die1, die2, 3, 5);
@@ -92,7 +88,5 @@ class BoardTest {
         String str = "Setting new dice values\r\nDie 1: 3\nDie 2: 5\n";
         assertEquals(str,baos.toString());
     }
-
-
 
 }

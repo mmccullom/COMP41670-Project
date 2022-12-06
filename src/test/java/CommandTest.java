@@ -4,8 +4,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class CommandTest {
 
-    //Command inputCommand = new Command("random");
-
 
     @Test
     void isQuitReturnsTrueForInputQ(){

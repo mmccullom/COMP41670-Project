@@ -4,15 +4,12 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class DieTest {
 
-
     Die dice = new Die();
 
     @Test
     void CheckRollReturnsAValidDiceRoll(){
-
         int val = dice.roll();
         assertTrue(1 <= val && val <= 6);
-
     }
 
     @Test
@@ -22,7 +19,6 @@ class DieTest {
     }
 
 
-
     @Test
     void CheckSetValCorrectly(){
         dice.setVal(6);
@@ -30,7 +26,5 @@ class DieTest {
         dice.setVal(1);
         assertEquals(1,dice.getVal());
     }
-
-
 
 }
