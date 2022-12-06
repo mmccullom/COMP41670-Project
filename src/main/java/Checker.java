@@ -1,3 +1,9 @@
+/**
+ * Team name: Group 46
+ * Student names: Mark Turley, Mike McCullom
+ * GitHub IDs: @markturley123 & @mmccullom
+ *
+ */
 public class Checker {
 
 	private boolean black;

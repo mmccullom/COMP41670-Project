@@ -1,3 +1,9 @@
+/**
+ * Team name: Group 46
+ * Student names: Mark Turley, Mike McCullom
+ * GitHub IDs: @markturley123 & @mmccullom
+ *
+ */
 public class Command {
 
     private enum CommandType {ROLL, QUIT, MOVE, PIP, DICE, DOUBLE, TEST, HINT};
